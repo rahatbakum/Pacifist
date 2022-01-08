@@ -5,9 +5,12 @@ using UnityEngine;
 public class SmoothCameraFollower : MonoBehaviour
 {
     [SerializeField] private Transform targetObject;
-    [SerializeField] private Vector2 offset = new Vector3(0, 0, 0);
+    [Space]
+    [SerializeField] private Vector3 offset = new Vector3(0, 0, 0);
     [SerializeField] private bool isSaveCurrentOffsetOnStart = false;
     [SerializeField] private float speed = 10f;
+
+    private float fixedZPosition;
 
     void Start()
     {
@@ -15,11 +18,16 @@ public class SmoothCameraFollower : MonoBehaviour
         {
             offset = transform.position - targetObject.position;
         }
+
+        fixedZPosition = transform.position.z;
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        if (Mathf.Abs(Vector3.Distance(transform.position, targetObject.position)) > 0.05f)
-            transform.position = Vector3.Lerp(transform.position, targetObject.position, speed * Time.deltaTime);
+        if (Mathf.Abs(Vector2.Distance(transform.position, targetObject.position)) > 0.05f)
+        {
+            transform.position = Vector2.Lerp(transform.position, targetObject.position + offset, speed * Time.deltaTime);
+            transform.position = new Vector3(transform.position.x, transform.position.y, fixedZPosition);
+        }
     }
 }

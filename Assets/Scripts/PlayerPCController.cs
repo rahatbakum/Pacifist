@@ -5,16 +5,24 @@ using UnityEngine;
 public class PlayerPCController : MonoBehaviour
 {
     [SerializeField] private float speed = 10f;
+
+    private Rigidbody2D thisRigidBody;
+
     void Start()
     {
-
+        thisRigidBody = GetComponent<Rigidbody2D>();
     }
 
     void Update()
     {
+        MovePlayer();
+    }
+
+    void MovePlayer()
+    {
         float horizontalAxis = Input.GetAxis("Horizontal");
         float verticalAxis = Input.GetAxis("Vertical");
 
-        transform.position = transform.position + (transform.right * horizontalAxis + transform.up * verticalAxis) * speed * Time.deltaTime; //Move Player
+        thisRigidBody.velocity = new Vector2(horizontalAxis * speed, verticalAxis * speed);
     }
 }
