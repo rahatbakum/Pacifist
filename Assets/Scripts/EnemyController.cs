@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    [SerializeField] private Transform playerTransform;
-    [SerializeField] private float speed = 5f;
+    public Transform playerTransform;
+    public float speed = 5f;
     
     void Start()
     {

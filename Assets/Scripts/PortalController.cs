@@ -5,12 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class PortalController : MonoBehaviour
 {
-    [SerializeField] private Sprite mainSprite;
-    [SerializeField] private Sprite touchSprite;
+    public Sprite mainSprite;
+    public Sprite touchSprite;
     [Space]
-    [SerializeField] private string playerTag = "Player";
-    [SerializeField] private string nextSceneName = "Level01";
-    [SerializeField] private bool isAutomatic = true; //is Automatically set scene name
+    public string playerTag = "Player";
+    public string nextSceneName = "Level01";
+    public bool isAutomatic = true; //is Automatically set scene name
 
     private SpriteRenderer thisSpriteRenderer;
 

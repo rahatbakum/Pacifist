@@ -96,7 +96,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3357a9ae660d8b14fa908e8e390fa2d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetObject: {fileID: 0}
+  targetObject: {fileID: 8913857340547800689, guid: 6c90c5178b7b4f44bb803b35d6c13aaa, type: 3}
   offset: {x: 0, y: 0, z: 0}
   isSaveCurrentOffsetOnStart: 0
-  speed: 10
+  speed: 9
+  sizeChangeSpeed: 1
+  maxTargetPositionRadius: 0.5

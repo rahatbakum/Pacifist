@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class SmoothCameraFollower : MonoBehaviour
 {
-    [SerializeField] private Transform targetObject;
+    public Transform targetObject;
     [Space]
-    [SerializeField] private Vector3 offset = new Vector3(0, 0, 0);
-    [SerializeField] private bool isSaveCurrentOffsetOnStart = false;
-    [SerializeField] private float speed = 10f;
-    //[SerializeField] private float outrunCoefficient = 2f;
-
+    public Vector3 offset = new Vector3(0, 0, 0);
+    public bool isSaveCurrentOffsetOnStart = false;
+    public float speed = 10f;
+    
     private float fixedZPosition;
+    private float minTargetCameraSize;
     private Rigidbody2D targetRigidBody;
+    private Camera thisCamera;
 
     void Start()
     {
@@ -24,6 +25,10 @@ public class SmoothCameraFollower : MonoBehaviour
         fixedZPosition = transform.position.z;
 
         targetRigidBody = targetObject.GetComponent<Rigidbody2D>();
+
+        thisCamera = GetComponent<Camera>();
+
+        minTargetCameraSize = thisCamera.orthographicSize;
     }
 
     void FixedUpdate()
@@ -34,11 +39,6 @@ public class SmoothCameraFollower : MonoBehaviour
     Vector3 calculateDesirePosition()
     {
         Vector3 ans = targetObject.position + offset;
-        // if (targetRigidBody)
-        // {
-        //     Vector3 velocityOffset = new Vector3(targetRigidBody.velocity.x, targetRigidBody.velocity.y, 0f);
-        //     ans = ans + velocityOffset * outrunCoefficient * Time.fixedDeltaTime;
-        // }
         ans = new Vector3(ans.x, ans.y, fixedZPosition);
 
         return ans;
@@ -52,4 +52,5 @@ public class SmoothCameraFollower : MonoBehaviour
             transform.position = new Vector3(transform.position.x, transform.position.y, fixedZPosition);
         }
     }
+
 }
